@@ -1,0 +1,36 @@
+.modal-body{
+    color: black;
+    background-color: #ffffff;
+    text-align: left;
+}
+
+.dialog {
+    resize: vertical;
+    overflow: auto;
+    min-height: 300px;
+    min-width: 1100px;
+    width: fit-content;
+    
+}
+
+table {
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.modal-header {
+    color: black;
+    background-color: #ffffff;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+tr {
+    width: 1%;
+    white-space: nowrap;
+}

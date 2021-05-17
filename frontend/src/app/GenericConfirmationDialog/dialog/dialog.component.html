@@ -1,0 +1,80 @@
+<div class="dialog">
+<div class="modal-header">
+  <h5 class="modal-title">Filter</h5>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross Click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+  <div class="modal-body">
+    <form #newFilterForm="ngForm">
+    <table>
+        <tbody>
+        <!--Filling table with data fetched from the backend service-->
+        <tr>
+          <th>Filter name</th>
+          <td><input type="text" name="name" ngModel class="form-control" value="{{ filters[filters.length-1].name}}" required></td>
+        </tr>
+        <tr>
+          <th>Filter conditions</th>
+          <td>Amount</td>
+          <td><input type="text" name="amount" ngModel class="form-control" value="{{ filters[filters.length-1].amount}}" required></td>
+          <td><select name="compare" ngModel class="form-control" required>
+            <option selected hidden>{{ filters[filters.length-1].compare}}</option>
+            <option value="Less than">Less than</option>
+            <option value="More than">More than</option>
+          </select></td>
+          <td><input type="text" name="numericField" ngModel class="form-control" value="{{ filters[filters.length-1].numericField}}" required></td>
+          <td><button *ngIf="filterService.incrementation > 1" type="button" class="btn btn-danger" (click)="filterService.increment(0)" >-</button></td>
+          <td><button *ngIf="filterService.incrementation < 3" type="button" class="btn btn-success" (click)="filterService.increment(1)">+</button></td>
+          
+        </tr>
+        <tr [hidden]="!filterService.first">
+          <th></th>
+            <td>Title</td>
+          <td><select name="text" ngModel class="form-control" value="{{ filters[filters.length-1].text}}" required>
+            <option value="" selected disabled hidden ></option>
+            <option value="Title">Title</option>
+            <option value="Description">Description</option>
+          </select></td>
+          <td><select name="textOptions" ngModel class="form-control" value="{{ filters[filters.length-1].textOptions}}" required>
+            <option selected disabled hidden></option>
+            <option value="Ends with">Ends with</option>
+            <option value="Starts with">Starts with</option>
+            <option value="Contains">Contains</option>
+          </select></td>
+          <td><input type="text" name="textField" ngModel class="form-control" value="{{ filters[filters.length-1].textField}}" required></td>
+         
+        </tr>
+        <tr [hidden]="!filterService.second">
+          <th></th>
+          <td>Date</td>
+          <td><select name="dateType" ngModel class="form-control" value="{{ filters[filters.length-1].dateType}}" required>
+            <option value="" selected disabled hidden ></option>
+            <option value="Release date">Release date</option>
+            <option value="Closing date">Closing date</option>
+          </select></td>
+          <td><select name="dateOptions" ngModel class="form-control" value="{{ filters[filters.length-1].dateOptions}}" required>
+            <option selected disabled hidden></option>
+            <option value="Before">Before</option>
+            <option value="After">After</option>
+          </select></td>
+          <td><input type="date" name="date" ngModel class="form-control" value="{{ filters[filters.length-1].date}}" required></td>
+        </tr>
+
+        <tr>
+          <th>Entry must include</th>
+          <th><input type="radio" name="conditions" value="All conditions" checked="checked" required> All conditions</th>
+          <th><input type="radio" name="conditions" value="At least one condition" required> At least one condition</th>
+          <th><input type="radio" name="conditions" value="None of the conditions" required> None of the conditions</th>
+        </tr>
+        <tr>
+          <th></th>
+          <td><button type="button" [disabled]="newFilterForm.invalid" (click)="addFilter(newFilterForm); activeModal.dismiss('Cross Click')">Apply Filter</button></td>
+          <td><button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross Click')">Cancel</button></td>
+        </tr>
+        </tbody>
+    </table>
+  </form>
+  </div>
+</div>
