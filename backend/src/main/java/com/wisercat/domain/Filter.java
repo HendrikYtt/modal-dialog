@@ -1,4 +1,4 @@
-package com.fujitsu.domain;
+package com.wisercat.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

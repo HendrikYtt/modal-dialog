@@ -1,6 +1,6 @@
-package com.fujitsu.service;
+package com.wisercat.service;
 
-import com.fujitsu.domain.Filter;
+import com.wisercat.domain.Filter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

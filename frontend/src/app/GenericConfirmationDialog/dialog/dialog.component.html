@@ -12,66 +12,62 @@
         <tbody>
         <!--Filling table with data fetched from the backend service-->
         <tr>
-          <th>Filter name</th>
-          <td><input type="text" name="name" ngModel class="form-control" value="{{ filters[filters.length-1].name}}" required></td>
+          <th>Filterbezeichnung</th>
+          <td *ngFor="let filter of filters"><input type="text" name="name" [(ngModel)]="filter.name" class="form-control" required></td>
         </tr>
         <tr>
-          <th>Filter conditions</th>
-          <td>Amount</td>
-          <td><input type="text" name="amount" ngModel class="form-control" value="{{ filters[filters.length-1].amount}}" required></td>
-          <td><select name="compare" ngModel class="form-control" required>
-            <option selected hidden>{{ filters[filters.length-1].compare}}</option>
-            <option value="Less than">Less than</option>
-            <option value="More than">More than</option>
+          <th>Filterbedingungen</th>
+          <td>Menge</td>
+          <td *ngFor="let filter of filters"><input type="text" name="amount" [(ngModel)]="filter.amount" class="form-control" placeholder="Nummer" required pattern="^[0-9]*$"></td>
+          <td *ngFor="let filter of filters"><select name="compare" [(ngModel)]="filter.compare" class="form-control" required>
+            <option value="weniger als">weniger als</option>
+            <option value="mehr als">mehr als</option>
           </select></td>
-          <td><input type="text" name="numericField" ngModel class="form-control" value="{{ filters[filters.length-1].numericField}}" required></td>
-          <td><button *ngIf="filterService.incrementation > 1" type="button" class="btn btn-danger" (click)="filterService.increment(0)" >-</button></td>
-          <td><button *ngIf="filterService.incrementation < 3" type="button" class="btn btn-success" (click)="filterService.increment(1)">+</button></td>
+          <td *ngFor="let filter of filters"><input type="text" name="numericField" [(ngModel)]="filter.numericField" class="form-control" placeholder="Nummer" required pattern="^[0-9]*$"></td>
+          <td><button [disabled]="filterService.incrementation === 1" type="button" class="btn btn-danger" (click)="filterService.increment(0)">-</button></td>
+          <td><button [disabled]="filterService.incrementation === 3" type="button" class="btn btn-success" (click)="filterService.increment(1)">+</button></td>
           
         </tr>
-        <tr [hidden]="!filterService.first">
+        <tr *ngIf="filterService.incrementation > 1">
           <th></th>
-            <td>Title</td>
-          <td><select name="text" ngModel class="form-control" value="{{ filters[filters.length-1].text}}" required>
-            <option value="" selected disabled hidden ></option>
-            <option value="Title">Title</option>
-            <option value="Description">Description</option>
+            <td>Titel</td>
+          <td *ngFor="let filter of filters"><select name="text" [(ngModel)]="filter.text" class="form-control" required>
+            <option value="titel">titel</option>
+            <option value="beschreibung">beschreibung</option>
           </select></td>
-          <td><select name="textOptions" ngModel class="form-control" value="{{ filters[filters.length-1].textOptions}}" required>
-            <option selected disabled hidden></option>
-            <option value="Ends with">Ends with</option>
-            <option value="Starts with">Starts with</option>
-            <option value="Contains">Contains</option>
+          <td *ngFor="let filter of filters"><select name="textOptions" [(ngModel)]="filter.textOptions" class="form-control" required>
+            <option value="endet mit">endet mit</option>
+            <option value="beginnt mit">beginnt mit</option>
+            <option value="enthält">enthält</option>
           </select></td>
-          <td><input type="text" name="textField" ngModel class="form-control" value="{{ filters[filters.length-1].textField}}" required></td>
+          <td *ngFor="let filter of filters"><input type="text" name="textField" [(ngModel)]="filter.textField" class="form-control" placeholder="Text" required></td>
          
         </tr>
-        <tr [hidden]="!filterService.second">
+        <tr *ngIf="filterService.incrementation > 2">
           <th></th>
-          <td>Date</td>
-          <td><select name="dateType" ngModel class="form-control" value="{{ filters[filters.length-1].dateType}}" required>
-            <option value="" selected disabled hidden ></option>
-            <option value="Release date">Release date</option>
-            <option value="Closing date">Closing date</option>
+          <td>Datum</td>
+          <td *ngFor="let filter of filters"><select name="dateType" [(ngModel)]="filter.dateType" class="form-control" required>
+            <option value="Veröffentlichungsdatum">Veröffentlichungsdatum</option>
+            <option value="Einsendeschluss">Einsendeschluss</option>
           </select></td>
-          <td><select name="dateOptions" ngModel class="form-control" value="{{ filters[filters.length-1].dateOptions}}" required>
-            <option selected disabled hidden></option>
-            <option value="Before">Before</option>
-            <option value="After">After</option>
+          <td *ngFor="let filter of filters"><select name="dateOptions" [(ngModel)]="filter.dateOptions" class="form-control" required>
+            <option value="liegt vor dem">liegt vor dem</option>
+            <option value="nach">nach</option>
           </select></td>
-          <td><input type="date" name="date" ngModel class="form-control" value="{{ filters[filters.length-1].date}}" required></td>
+          <td *ngFor="let filter of filters"><input type="date" name="date" [(ngModel)]="filter.date" class="form-control" required></td>
         </tr>
 
-        <tr>
-          <th>Entry must include</th>
-          <th><input type="radio" name="conditions" value="All conditions" checked="checked" required> All conditions</th>
-          <th><input type="radio" name="conditions" value="At least one condition" required> At least one condition</th>
-          <th><input type="radio" name="conditions" value="None of the conditions" required> None of the conditions</th>
+        <tr *ngFor="let filter of filters">
+          <th>Eintrag soll</th>
+          <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="alle Bedingungen" checked="checked" required> alle Bedingungen</th>
+          <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="mindestens eine Bedingung" required> mindestens eine Bedingung</th>
+          <th></th>
+          <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="keine der Bedingungen erfüllen" required> keine der Bedingungen erfüllen</th>
         </tr>
         <tr>
           <th></th>
-          <td><button type="button" [disabled]="newFilterForm.invalid" (click)="addFilter(newFilterForm); activeModal.dismiss('Cross Click')">Apply Filter</button></td>
-          <td><button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross Click')">Cancel</button></td>
+          <td><button type="button" class="btn btn-primary" [disabled]="newFilterForm.invalid" (click)="addFilter(newFilterForm); activeModal.dismiss('Cross Click')">Filter anwenden</button></td>
+          <td><button type="button" class="btn btn-secondary"(click)="activeModal.dismiss('Cross Click')">Abbrechen</button></td>
         </tr>
         </tbody>
     </table>

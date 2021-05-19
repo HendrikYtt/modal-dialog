@@ -13,20 +13,20 @@ export class DialogComponent implements OnInit {
   
   public filter: Filter;
   public filters: Filter[];
-  public editFilter = new Filter();
 
   constructor(public activeModal: NgbActiveModal, private filterService: FilterService) {}
 
   ngOnInit() {
     this.getFilters();
+    
    }
 
   public getFilters(): void {
     this.filterService.getFilter().subscribe(
       (data) => {
         this.filters = data;
-        console.log(data);
-        console.log(this.filter);
+        console.dir(this.filters[this.filters.length-1].date);
+        console.log(this.filters[0].textOptions);
       }
     )
 }
@@ -39,9 +39,5 @@ public addFilter(userForm: NgForm): void {
       }
     )
 }
-
-  actionTaken(result: any) {
-    this.activeModal.close(JSON.stringify(result));
-  }
 
 }

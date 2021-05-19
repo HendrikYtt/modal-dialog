@@ -1,7 +1,7 @@
-package com.fujitsu;
+package com.wisercat;
 
-import com.fujitsu.domain.Filter;
-import com.fujitsu.repository.FilterRepository;
+import com.wisercat.domain.Filter;
+import com.wisercat.repository.FilterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -21,7 +21,7 @@ public class DemoData {
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
 
-        filterRepository.save(new Filter(1, "Filter 4", "10", "Less than", "5",
-                "Title", "Ends with", "nding", "Release date", "Before", "2021-05-13", "All conditions"));
+        filterRepository.save(new Filter(1, "Filter 4", "10", "weniger als", "5",
+                "titel", "endet mit", "ung", "Veröffentlichungsdatum", "liegt vor dem", "2021-05-13", "alle Bedingungen"));
     }
 }

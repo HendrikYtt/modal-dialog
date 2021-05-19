@@ -9,8 +9,6 @@ import { Filter } from '../model/filter';
 export class FilterService {
   private host = "http://localhost:8080" //Backend service API endpoint
   public incrementation = 1;
-  public first = false;
-  public second = false;
 
   constructor(private http: HttpClient) { }
 
@@ -20,19 +18,6 @@ export class FilterService {
     }
     else {
       this.incrementation -= 1;
-    }
-
-    if(this.incrementation === 1) {
-      this.first = false;
-    }
-
-    if(this.incrementation === 2) {
-      this.first = true;
-      this.second = false;
-    }
-
-    if(this.incrementation === 3) {
-      this.second = true;
     }
     if(this.incrementation > 3) {
       this.incrementation = 3;

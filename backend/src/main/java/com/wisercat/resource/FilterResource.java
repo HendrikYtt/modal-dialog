@@ -1,7 +1,7 @@
-package com.fujitsu.resource;
+package com.wisercat.resource;
 
-import com.fujitsu.domain.Filter;
-import com.fujitsu.service.FilterService;
+import com.wisercat.domain.Filter;
+import com.wisercat.service.FilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

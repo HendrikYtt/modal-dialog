@@ -1,6 +1,6 @@
-package com.fujitsu.resource;
+package com.wisercat.resource;
 
-import com.fujitsu.repository.FilterRepository;
+import com.wisercat.repository.FilterRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
