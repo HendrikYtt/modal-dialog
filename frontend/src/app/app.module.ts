@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { DialogComponent } from './GenericConfirmationDialog/dialog/dialog.component';
+import { DialogComponent } from './modaldialog/dialog/dialog.component';
 
 @NgModule({
   declarations: [

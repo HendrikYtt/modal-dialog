@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogServiceService } from './GenericConfirmationDialog/dialog-service.service';
+import { DialogServiceService } from './modaldialog/dialog-service.service';
 
 @Component({
   selector: 'app-root',
