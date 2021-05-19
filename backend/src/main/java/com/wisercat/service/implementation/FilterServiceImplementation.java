@@ -84,6 +84,4 @@ public class FilterServiceImplementation implements FilterService {
             filter.setConditions("");
         }
     }
-
-
 }

@@ -5,7 +5,6 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-
   <div class="modal-body">
     <form #newFilterForm="ngForm">
     <table>
@@ -26,7 +25,6 @@
           <td *ngFor="let filter of filters"><input type="text" name="numericField" [(ngModel)]="filter.numericField" class="form-control" placeholder="Nummer" required pattern="^[0-9]*$"></td>
           <td><button [disabled]="filterService.incrementation === 1" type="button" class="btn btn-danger" (click)="filterService.increment(0)">-</button></td>
           <td><button [disabled]="filterService.incrementation === 3" type="button" class="btn btn-success" (click)="filterService.increment(1)">+</button></td>
-          
         </tr>
         <tr *ngIf="filterService.incrementation > 1">
           <th></th>
@@ -41,7 +39,6 @@
             <option value="enthält">enthält</option>
           </select></td>
           <td *ngFor="let filter of filters"><input type="text" name="textField" [(ngModel)]="filter.textField" class="form-control" placeholder="Text" required></td>
-         
         </tr>
         <tr *ngIf="filterService.incrementation > 2">
           <th></th>
@@ -56,12 +53,11 @@
           </select></td>
           <td *ngFor="let filter of filters"><input type="date" name="date" [(ngModel)]="filter.date" class="form-control" required></td>
         </tr>
-
         <tr *ngFor="let filter of filters">
           <th>Eintrag soll</th>
+          <th></th>
           <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="alle Bedingungen" checked="checked" required> alle Bedingungen</th>
           <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="mindestens eine Bedingung" required> mindestens eine Bedingung</th>
-          <th></th>
           <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="keine der Bedingungen erfüllen" required> keine der Bedingungen erfüllen</th>
         </tr>
         <tr>
