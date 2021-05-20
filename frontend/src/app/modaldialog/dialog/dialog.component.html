@@ -7,26 +7,33 @@
 </div>
   <div class="modal-body">
     <form #newFilterForm="ngForm">
-    <table>
+    <table class="datatable">
         <tbody>
-        <!--Filling table with data fetched from the backend service-->
-        <tr>
+        <tr class="datarow">
           <th>Filterbezeichnung</th>
           <td *ngFor="let filter of filters"><input type="text" name="name" [(ngModel)]="filter.name" class="form-control" required></td>
         </tr>
-        <tr>
+        <tr class="datarow">
           <th>Filterbedingungen</th>
           <td>Menge</td>
-          <td *ngFor="let filter of filters"><input type="text" name="amount" [(ngModel)]="filter.amount" class="form-control" placeholder="Nummer" required pattern="^[0-9]*$"></td>
+          <td *ngFor="let filter of filters"><input type="text" name="amount" [(ngModel)]="filter.amount" class="form-control" placeholder="Nummer" #amount="ngModel" required pattern="^[0-9]*$">
+          <span class="error" *ngIf="amount?.errors?.pattern">
+            Muss eine Nummer sein
+          </span>
+        </td>
           <td *ngFor="let filter of filters"><select name="compare" [(ngModel)]="filter.compare" class="form-control" required>
             <option value="weniger als">weniger als</option>
             <option value="mehr als">mehr als</option>
           </select></td>
-          <td *ngFor="let filter of filters"><input type="text" name="numericField" [(ngModel)]="filter.numericField" class="form-control" placeholder="Nummer" required pattern="^[0-9]*$"></td>
+          <td *ngFor="let filter of filters"><input type="text" name="numericField" [(ngModel)]="filter.numericField" class="form-control" placeholder="Nummer" #numericField="ngModel" required pattern="^[0-9]*$">
+          <span class="error" *ngIf="numericField?.errors?.pattern">
+            Muss eine Nummer sein
+          </span>
+        </td>
           <td><button [disabled]="filterService.incrementation === 1" type="button" class="btn btn-danger" (click)="filterService.increment(0)">-</button></td>
           <td><button [disabled]="filterService.incrementation === 3" type="button" class="btn btn-success" (click)="filterService.increment(1)">+</button></td>
         </tr>
-        <tr *ngIf="filterService.incrementation > 1">
+        <tr class="datarow" *ngIf="filterService.incrementation > 1">
           <th></th>
             <td>Titel</td>
           <td *ngFor="let filter of filters"><select name="text" [(ngModel)]="filter.text" class="form-control" required>
@@ -40,7 +47,7 @@
           </select></td>
           <td *ngFor="let filter of filters"><input type="text" name="textField" [(ngModel)]="filter.textField" class="form-control" placeholder="Text" required></td>
         </tr>
-        <tr *ngIf="filterService.incrementation > 2">
+        <tr class="datarow" *ngIf="filterService.incrementation > 2">
           <th></th>
           <td>Datum</td>
           <td *ngFor="let filter of filters"><select name="dateType" [(ngModel)]="filter.dateType" class="form-control" required>
@@ -53,14 +60,14 @@
           </select></td>
           <td *ngFor="let filter of filters"><input type="date" name="date" [(ngModel)]="filter.date" class="form-control" required></td>
         </tr>
-        <tr *ngFor="let filter of filters">
+        <tr class="datarow" *ngFor="let filter of filters">
           <th>Eintrag soll</th>
           <th></th>
           <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="alle Bedingungen" checked="checked" required> alle Bedingungen</th>
           <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="mindestens eine Bedingung" required> mindestens eine Bedingung</th>
           <th><input type="radio" [(ngModel)]="filter.conditions" name="conditions" value="keine der Bedingungen erfüllen" required> keine der Bedingungen erfüllen</th>
         </tr>
-        <tr>
+        <tr class="datarow">
           <th></th>
           <td><button type="button" class="btn btn-primary" [disabled]="newFilterForm.invalid" (click)="addFilter(newFilterForm); activeModal.dismiss('Cross Click')">Filter anwenden</button></td>
           <td><button type="button" class="btn btn-secondary"(click)="activeModal.dismiss('Cross Click')">Abbrechen</button></td>

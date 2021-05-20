@@ -9,7 +9,11 @@
     text-align: left;
 }
 
-table {
+.error {
+    color:#ff0000;
+}
+
+.datatable {
     border-spacing: 10px;
     border-collapse: separate;
 }
@@ -20,7 +24,7 @@ table {
     display: none;
 }
 
-tr {
+.datarow {
     width: 1%;
     white-space: nowrap;
 }

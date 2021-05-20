@@ -25,8 +25,6 @@ export class DialogComponent implements OnInit {
     this.filterService.getFilter().subscribe(
       (data) => {
         this.filters = data;
-        console.dir(this.filters[this.filters.length-1].date);
-        console.log(this.filters[0].textOptions);
       }
     )
 }

@@ -3,21 +3,17 @@ package com.wisercat.service.implementation;
 import com.wisercat.domain.Filter;
 import com.wisercat.repository.FilterRepository;
 import com.wisercat.service.FilterService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
 @Transactional
 public class FilterServiceImplementation implements FilterService {
-    private FilterRepository filterRepository;
-    private static Logger logger = LoggerFactory.getLogger(FilterServiceImplementation.class);
+
+    private final FilterRepository filterRepository;
 
     @Autowired
     public FilterServiceImplementation(FilterRepository filterRepository) {
@@ -49,6 +45,7 @@ public class FilterServiceImplementation implements FilterService {
         return filter;
     }
 
+    //funktsioon, mis seab andmete väärtuseks "", kui osasid filtri atribuute ei kasutata
     public void validateUndefined(Filter filter) {
         if(filter.getName().equals("undefined")) {
             filter.setName("");
